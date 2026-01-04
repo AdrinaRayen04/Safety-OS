@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Safety OS - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="login-body">
+    <div class="login-card">
+        <div class="login-header">
+            <i class="fas fa-user-shield fa-3x" style="color: #e67e22;"></i>
+            <h2>SAFETY OS</h2>
+            <p>Authorized Personnel Only</p>
+        </div>
+
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">LOGIN TO DASHBOARD</button>
+        </form>
+
+        <p style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">
+            New worker? <a href="/signup" style="color: #e67e22; text-decoration: none; font-weight: bold;">Create an account</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Safety OS Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+    <!-- Top -->
+    <div class="sidebar-top">
+        <div class="sidebar-header">
+            <h3>SAFETY OS</h3>
+            <span class="nav-subtitle">Navigation</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/home" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/camera_page" class="nav-link">
+                <i class="fas fa-video"></i>
+                <span>Live Feed</span>
+            </a>
+
+            <a href="/chatbot" class="nav-link">
+                <i class="fas fa-robot"></i>
+                <span>Chatbot</span>
+            </a>
+
+            <a href="/history" class="nav-link">
+                <i class="fas fa-history"></i>
+                <span>Audit Logs</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Bottom -->
+    <div class="sidebar-bottom">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>{{ session['user'] }}</span>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="nav-link logout">
+    <i class="fas fa-sign-out-alt"></i>
+    Logout
+</a>
+
+    </div>
+
+</aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="welcome-section">
+            <h1>Industry Safety Dashboard</h1>
+            <p>Welcome, {{ session['user'] }}. Select a safety module below.</p>
+        </div>
+
+        <div class="card-container">
+            <div class="card" onclick="location.href='/camera_page'">
+                <i class="fas fa-shield-virus"></i>
+                <h3>AI PPE Detection</h3>
+                <p>Monitor live area for safety compliance.</p>
+            </div>
+
+            <div class="card" onclick="location.href='/chatbot'">
+                <i class="fas fa-comments"></i>
+                <h3>Safety Chatbot</h3>
+                <p>Ask about emergency protocols and rules.</p>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

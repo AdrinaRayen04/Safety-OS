@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Safety Portal - Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="display: block; background: linear-gradient(135deg, #1e3c72, #2a5298); min-height: 100vh;">
+    <div class="main-content">
+    <div class="ppe-page">
+
+    <a href="/home" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <h2 class="ppe-title">Live PPE Detection Feed</h2>
+
+    <div class="video-card">
+        <img src="{{ url_for('video_feed') }}" class="video-feed">
+    </div>
+
+   <div id="statusBox" style="padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; font-size: 22px; background: #34495e; color: white;">
+    INITIALIZING...
+</div>
+</div>
+</div>
+</body>
+<script>
+    // This runs every second to update the red/green box
+setInterval(() => {
+        fetch('/get_status')
+            .then(response => response.json())
+            .then(data => {
+                const box = document.getElementById('statusBox');
+                box.innerText = data.status;
+                box.style.background = data.status.includes("ALERT") ? "#e74c3c" : "#2ecc71";
+            });
+    }, 1000);
+    function updateStatus() {
+        // Fetch the global current_status from Python
+        fetch('/get_status')
+            .then(response => response.json())
+            .then(data => {
+                const box = document.getElementById('statusBox');
+                box.innerText = data.status;
+
+                // Color Logic
+                if (data.status.includes("ALERT")) {
+                    box.style.background = "#e74c3c"; // Red
+                } else if (data.status.includes("ALL PPE")) {
+                    box.style.background = "#2ecc71"; // Green
+                } else {
+                    box.style.background = "#34495e"; // Default Grey
+                }
+            })
+            .catch(err => console.error("Status Update Error:", err));
+    }
+
+    // Run this update twice every second
+    setInterval(updateStatus, 500);
+</script>
+</html>
